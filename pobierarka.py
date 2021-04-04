@@ -3,8 +3,15 @@ from time import *
 import urllib.request
 import re
 
+all=0
+elapsed_time=0
+now=time()
+
 #download single vid
 def pobier(lunk):
+	all=0
+	elapsed_time=0
+	now=time()
 	if 'youtube' not in lunk:
 		lunk = 'https://www.youtube.com/watch?v='+lunk
 	try:
@@ -22,11 +29,11 @@ def pobier_liste(link_listy, ile=1000):
 	x = set(re.findall(r'"videoId":"([^"]*)"',x.decode("utf-8")))
 	all_vid=len(x)
 	pobrane=[]
-	for vid,i in enumerate(x):
+	for i,vid in enumerate(x):
 		print(str(i+1)+"/"+str(all_vid),end=" ")
 		if vid in pobrane:
 			continue
-		if i<ile: 
+		if i<int(ile): 
 			pobier(vid)
 			pobrane.append(vid)
 		else: 
@@ -34,6 +41,9 @@ def pobier_liste(link_listy, ile=1000):
 
 #progress percentage visualization
 def progress_check(stream = None, chunk = None, file_handle = None, remaining = None):
+	global all
+	global elapsed_time
+	global now
 	all+=len(chunk)
 	elapsed_time+=time()-now
 	now=time()
