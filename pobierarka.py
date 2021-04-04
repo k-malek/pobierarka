@@ -24,7 +24,7 @@ def pobier(lunk):
 #download playlist		
 def pobier_liste(link_listy, ile=1000):
 	x = urllib.request.urlopen(link_listy).read()
-	x = set(re.findall(r'"videoId":"([^"]*)"',x.decode("utf-8")))
+	x = re.findall(r'"videoId":"([^"]*)"',x.decode("utf-8"))
 	all_vid=len(x)
 	pobrane=[]
 	for i,vid in enumerate(x):
