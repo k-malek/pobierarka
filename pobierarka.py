@@ -1,7 +1,6 @@
 from pytube import *
 from time import *
-import urllib.request
-import re
+import urllib.request, re
 
 all=0
 elapsed_time=0
