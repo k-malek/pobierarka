@@ -2,12 +2,11 @@ from pytube import *
 from time import *
 import urllib.request, re
 
-all=0
-elapsed_time=0
-now=time()
-
 #download single vid
 def pobier(lunk):
+	global all
+	global elapsed_time
+	global now
 	all=0
 	elapsed_time=0
 	now=time()
