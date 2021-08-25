@@ -1,6 +1,6 @@
 from pytube import *
 from time import *
-import urllib.request, re
+import urllib.request, re, math
 
 #download single vid
 def pobier(lunk):
@@ -50,4 +50,5 @@ def progress_check(stream = None, chunk = None, file_handle = None, remaining = 
 	hours=int(remaining_time/3600)
 	minutes=int((remaining_time-hours*3600)/60)
 	seconds=int(remaining_time-hours*3600-minutes*60)
-	print("{:.2f}% passed {}s, ETA app. {}h {}min {}s         ".format(percent,int(elapsed_time),hours,minutes,seconds), end='\r')
+	strokes_for_bar=math.floor(percent//5)
+	print("{:.2f}% [".format(percent)+"="*strokes_for_bar+"-"*(20-strokes_for_bar)+"] passed {}s, ETA app. {}h {}min {}s         ".format(int(elapsed_time),hours,minutes,seconds), end='\r')
