@@ -1,6 +1,6 @@
 from pytube import *
 from time import *
-import urllib.request, re, math
+import urllib.request, re, math, os
 
 #download single vid
 def pobier(lunk,path=''):
@@ -42,13 +42,17 @@ def pobier_liste(link_listy, ile=1000):
 
 #download videos from channel            
 def pobier_kanal(channel_name,ile=5):
+    curr_path=os.getcwd()
+    path=curr_path+r"/"+channel_name
+    if not os.path.exists(path):
+        os.mkdir(path)
     c=Channel('https://www.youtube.com/c/'+channel_name)
     i=0
     for vid in c.video_urls:
-        print(vid)
-        pobier(vid)
+        print(str(i+1)+r"/"+str(min(ile,len(c.video_urls))))
+        pobier(vid,path)
         i+=1
-        if i==ile:
+        if i==ile or i==len(c.video_urls):
             break
             
 #progress percentage visualization
